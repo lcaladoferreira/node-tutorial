@@ -1,20 +1,17 @@
-// const _= require("lodash");
-// // const inverval = require("./2-setInterval");
+// data in chunks
 
-// // const exemplo = inverval.setInterval(()=>{
-// //     console.log('teste do app')
-// // }, 2000)
+var http = require('http');
+var fs = require('fs');
 
-// const items = [1, [2, [3, [4]]]]
-// const newItems = _.flattenDeep(items);
-// console.log(newItems)
-// console.log("hello people")
-
-const http = require('http')
-const server = http.createServer((req, res) => {
-    console.log("request event")
-    res.end("hey people")
+http.createServer(function(req, res){
+    // const text = fs.readFileSync('./content/big.txt', 'utf8')
+    // res.end(text)
+    const fileStream = fs.createReadStream('./content/big.txt', 'utf8');
+    fileStream.on('open', ()=>{
+        fileStream.pipe(res)
+    })
+    fileStream.on('error', (err)=>{
+        res.end(err)
+    })
 })
-server.listen(3001, ()=>{
-    console.log("listening on http://localhost:3001")
-})
+.listen(3001)

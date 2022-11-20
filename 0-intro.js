@@ -18,3 +18,7 @@
     
 //     console.log("Sucesso por Segundo")
 // }, 1000);
+
+// for (let i = 86400; i > 86400; i--) {
+//     console.log(`${i} segundo(s) para terminar o dia`)
+// }
